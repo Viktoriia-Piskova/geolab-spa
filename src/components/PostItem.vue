@@ -2,20 +2,32 @@
   <div class="hello">
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
-    <p>Comments count:</p>
+    <p>Comments count: {{ post.comments.length }}</p>
+    <p>{{ mailLength }}</p>
+    <CommentsChart :mailLength="mailLength" />
   </div>
 </template>
 
 <script>
+import CommentsChart from "@/components/CommentsChart.vue";
+
 export default {
   name: "PostItem",
   props: {
     post: Object,
   },
+  components: { CommentsChart },
+  computed: {
+    mailLength() {
+      const mailLengthList = this.post.comments.map((comment) => {
+        return comment.email.length;
+      });
+      return mailLengthList;
+    },
+  },
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
   margin: 40px 0 0;
