@@ -90,6 +90,8 @@ export default {
 .pagination {
   display: flex;
   justify-content: space-between;
+  width: 65%;
+  margin: auto;
 
   a {
     display: flex;
@@ -138,10 +140,5 @@ form {
       background-color: #21583f;
     }
   }
-}
-
-.disabled {
-  color: grey;
-  cursor: not-allowed;
 }
 </style>
