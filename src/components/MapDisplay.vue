@@ -51,7 +51,6 @@ export default {
       iconWidth: 25,
       iconHeight: 40,
       markers: [],
-      //   center: [48.383022, 31.1828699],
       center: leaflet.latLng([48.383022, 31.1828699]),
       popupIsOpened: false,
       markerInfo: {
@@ -60,6 +59,7 @@ export default {
         lng: "",
       },
       markerTitle: "",
+      markerCounter: 1,
     };
   },
   computed: {},
@@ -75,12 +75,17 @@ export default {
     },
     removeMarker(index) {
       this.markers.splice(index, 1);
+      const markersJson = JSON.stringify(this.markers);
+      localStorage.setItem("markers", markersJson);
     },
     addMarkerTitle() {
       const markerToAddTitle = this.markers[this.markers.length - 1];
       markerToAddTitle.title = this.markerInfo.title;
       this.popupIsOpened = false;
-      this.markerInfo.title = "New Marker";
+      this.markerCounter += 1;
+      this.markerInfo.title = "New Marker " + this.markerCounter;
+      const markersJson = JSON.stringify(this.markers);
+      localStorage.setItem("markers", markersJson);
     },
     showMarkerTitle(index) {
       this.markerTitle = this.markers[index].title;
@@ -88,6 +93,9 @@ export default {
     zoomUpdated(zoom) {
       this.zoom = zoom;
     },
+  },
+  mounted() {
+    this.markers = JSON.parse(localStorage.getItem("markers")) || [];
   },
 };
 </script>

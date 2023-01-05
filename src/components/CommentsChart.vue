@@ -29,10 +29,15 @@ export default {
   data() {
     return {
       rawData: {
-        labels: ["1", "2", "3", "4", "5"],
+        labels: [],
       },
       chartOptions: {
         responsive: true,
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
       },
     };
   },
@@ -45,6 +50,10 @@ export default {
   computed: {
     mailData() {
       const chartData = this.rawData;
+      chartData.labels = Array.from(
+        { length: this.mailLength.length },
+        (_, i) => i + 1
+      );
       chartData.datasets = [{ data: [...this.mailLength] }];
       return chartData;
     },

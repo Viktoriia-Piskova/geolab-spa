@@ -1,9 +1,8 @@
 <template>
-  <div class="hello">
+  <div class="article">
     <h2>{{ post.title }}</h2>
     <p>{{ post.body }}</p>
-    <p>Comments count: {{ post.comments.length }}</p>
-    <p>{{ mailLength }}</p>
+    <h3>Comments count: {{ post.comments.length }}</h3>
     <CommentsChart :mailLength="mailLength" />
   </div>
 </template>
@@ -16,6 +15,7 @@ export default {
   props: {
     post: Object,
   },
+
   components: { CommentsChart },
   computed: {
     mailLength() {
@@ -29,6 +29,13 @@ export default {
 </script>
 
 <style scoped>
+.article {
+  width: 80vw;
+  margin: 2rem auto;
+  border: 1px solid #42b9839e;
+  border-radius: 5px;
+  padding: 2rem;
+}
 h3 {
   margin: 40px 0 0;
 }
